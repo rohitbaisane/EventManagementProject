@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 
+require("./db");
 
 const PORT = 5000;
+
 // prepare and start the starver.
 const prepareAndStartServer = async (req, res) => {
 
