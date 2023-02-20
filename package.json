@@ -1,0 +1,14 @@
+{
+  "name": "eventmanagementproject",
+  "version": "1.0.0",
+  "description": "This is personal project for event management.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rohit Baisane",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
