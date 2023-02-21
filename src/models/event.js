@@ -11,6 +11,8 @@ const eventSchema = new mongoose.Schema({
     },
     code: {
         type: Number,
+        required: true,
+        maxlength: 6,
     },
     invitedUsers: [{
         type: mongoose.Types.ObjectId,
@@ -18,15 +20,15 @@ const eventSchema = new mongoose.Schema({
         required: true,
     }],
     userId: {
-        type: userId,
+        type: mongoose.Types.ObjectId,
         required: true,
+        ref: "User",
     },
     maximumAllowedUsers: {
-        type: Number
+        type: Number,
+        required: true,
     },
-    images: {
-        type: String,
-    }
+    images: [String],
 }, {
     timestamps: true
 });

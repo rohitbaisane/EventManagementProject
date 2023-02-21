@@ -5,7 +5,7 @@ require("./db");
 
 const errorHandler = require("./middlewares/error-handler");
 const responses = require("./middlewares/response");
-const apiRoutes = require("./routes/user-routes");
+const apiRoutes = require("./routes/index");
 const PORT = 5000;
 
 // prepare and start the starver.
