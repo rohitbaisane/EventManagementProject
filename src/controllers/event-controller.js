@@ -4,6 +4,9 @@ const asyncHandler = require("../utils/asyncHandler");
 
 
 const createEvent = asyncHandler(async (req, res) => {
+    console.log(req.file);
+    console.log("  \n");
+    console.log(req.body);
     const params = { ...req.body, userId: req.user._id };
     const eventRecord = await EventService.createEvent(params);
     return res.CREATED(eventRecord);
@@ -15,6 +18,11 @@ const getEvent = asyncHandler(async (req, res) => {
     return res.CREATED(eventRecord);
 });
 
+const uploadImage = asyncHandler(async (req, res) => {
+    const image = req.file;
+    return res.CREATED(image);
+
+});
 const updateEvent = asyncHandler(async (req, res) => {
     const params = { body: req.body, userId: req.user._id, eventId: req.params.id };
     const eventRecord = await EventService.updateEvent(params.eventId, params.userId, params.body);
@@ -32,4 +40,5 @@ module.exports = {
     getEvent,
     updateEvent,
     deleteEvent,
+    uploadImage,
 }

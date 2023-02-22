@@ -6,6 +6,7 @@ const ErrorCodes = require("../utils/status-codes");
 const { generateEventCode, compareEventTime } = require("../utils/helper");
 
 const createEvent = async (data) => {
+
     compareEventTime(data.startTime, data.endTime);
     const eventCode = await generateEventCode();
     data.code = eventCode;

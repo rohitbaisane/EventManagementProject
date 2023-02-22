@@ -17,7 +17,6 @@ const eventSchema = new mongoose.Schema({
     invitedUsers: [{
         type: mongoose.Types.ObjectId,
         ref: "User",
-        required: true,
     }],
     userId: {
         type: mongoose.Types.ObjectId,
