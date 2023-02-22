@@ -17,13 +17,13 @@ const getEvent = asyncHandler(async (req, res) => {
 
 const updateEvent = asyncHandler(async (req, res) => {
     const params = { body: req.body, userId: req.user._id, eventId: req.params.id };
-    const eventRecord = await EventService.updateEvent(params.eventId, params.userId, params.data);
+    const eventRecord = await EventService.updateEvent(params.eventId, params.userId, params.body);
     return res.OK(eventRecord);
 });
 
 const deleteEvent = asyncHandler(async (req, res) => {
-    const params = { ...req.params };
-    const eventRecord = await EventService.deleteEvent(params.id);
+    const params = { ...req.params, userId: req.user._id };
+    const eventRecord = await EventService.deleteEvent(params.id, params.userId);
     return res.OK(eventRecord);
 });
 

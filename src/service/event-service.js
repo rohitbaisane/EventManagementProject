@@ -35,8 +35,14 @@ const updateEvent = async (eventId, userId, data) => {
     return eventRecord;
 };
 
-const deleteEvent = async (eventId) => {
-    const eventRecord = await Event.findByIdAndRemove(eventId);
+const deleteEvent = async (eventId, userId) => {
+    const eventRecord = await Event.findOneAndRemove({ _id: eventId, userId });
+    if (!eventRecord) {
+        throw new ErrorResponse(
+            "Event does not exist",
+            ErrorCodes.BAD_REQUESET,
+        );
+    }
     return eventRecord;
 
 };
