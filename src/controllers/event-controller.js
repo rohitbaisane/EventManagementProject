@@ -16,8 +16,8 @@ const getEvent = asyncHandler(async (req, res) => {
 });
 
 const updateEvent = asyncHandler(async (req, res) => {
-    const params = { ...req.body, userId: req.user._id };
-    const eventRecord = await EventService.updateEvent(params);
+    const params = { body: req.body, userId: req.user._id, eventId: req.params.id };
+    const eventRecord = await EventService.updateEvent(params.eventId, params.userId, params.data);
     return res.OK(eventRecord);
 });
 

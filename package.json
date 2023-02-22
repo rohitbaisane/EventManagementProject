@@ -4,7 +4,7 @@
   "description": "This is personal project for event management.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"nodemon src/index.js"
   },
   "author": "Rohit Baisane",
   "license": "ISC",
