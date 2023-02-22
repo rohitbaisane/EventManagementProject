@@ -1,7 +1,9 @@
 const Event = require("../models/event");
-
+const generateEventCode = require("../utils/helper");
 
 const createEvent = async (data) => {
+    const eventCode = await generateEventCode();
+    data.code = eventCode;
     const eventRecord = await Event.create(data);
     return eventRecord;
 
