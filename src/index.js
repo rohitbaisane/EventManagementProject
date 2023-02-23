@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 require("./db");
+require("./service/cronService");
 
 const errorHandler = require("./middlewares/errorHandler");
 const responses = require("./middlewares/response");

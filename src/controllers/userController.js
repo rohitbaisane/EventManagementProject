@@ -50,7 +50,7 @@ const resetPasswordRequest = asyncHandler(async (req, res) => {
 
 const changePassword = asyncHandler(async (req, res) => {
     const params = { ...req.query, ...req.body };
-    checkMandatoryFields(data, ['token', 'userId', 'password']);
+    checkMandatoryFields(params, ['token', 'userId', 'password']);
     const response = await UserService.changePassword(params.token, params.userId, params.password);
     return res.OK(response);
 });

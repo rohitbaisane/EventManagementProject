@@ -10,7 +10,7 @@ const createEvent = asyncHandler(async (req, res) => {
 
 const getEvent = asyncHandler(async (req, res) => {
     const params = req.params;
-    const userId = req.userId
+    const userId = req.userId;
     const eventRecord = await EventService.getEvent(params.id, userId);
     return res.CREATED(eventRecord);
 });
@@ -24,7 +24,7 @@ const getAllEvents = asyncHandler(async (req, res) => {
 
 const updateEvent = asyncHandler(async (req, res) => {
     const params = { ...req.body, ...req.params };
-    const userId = req.useId;
+    const userId = req.userId;
     const eventRecord = await EventService.updateEvent(params.id, params, userId);
     return res.OK(eventRecord);
 });

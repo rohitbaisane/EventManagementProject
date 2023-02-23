@@ -28,8 +28,10 @@ const getAllEvents = async (filter, userId) => {
 
 
 const getEvent = async (eventId, userId) => {
+    console.log(eventId);
+    console.log(userId);
     const eventRecord = await Event.findOne({
-        id: eventId,
+        _id: eventId,
         createdBy: userId,
     });
     if (!eventRecord) {
