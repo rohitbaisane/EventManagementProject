@@ -24,22 +24,29 @@ const getAllEvents = asyncHandler(async (req, res) => {
 
 const updateEvent = asyncHandler(async (req, res) => {
     const params = { ...req.body, ...req.params };
-    const userId = { req };
+    const userId = req.useId;
     const eventRecord = await EventService.updateEvent(params.id, params, userId);
     return res.OK(eventRecord);
 });
 
 const deleteEvent = asyncHandler(async (req, res) => {
     const params = req.params;
-    const userId = { req };
+    const userId = req.userId;
     const eventRecord = await EventService.deleteEvent(params.id, userId);
     return res.OK(eventRecord);
 });
 
+const updateInviteStatus = asyncHandler(async (req, res) => {
+    const params = req.body;
+    const userId = req.userId;
+    const response = await EventService.updateInviteStatus(params, userId);
+    return res.OK(response);
+});
 module.exports = {
     createEvent,
     getEvent,
     getAllEvents,
     updateEvent,
     deleteEvent,
+    updateInviteStatus,
 }

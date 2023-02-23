@@ -74,6 +74,32 @@ const deleteEvent = async (eventId, userId) => {
 
 };
 
+const updateInviteStatus = async (data, userId) => {
+
+    const { code, status } = data;
+    const eventRecord = await Event.findOne({ code });
+    if (!eventRecord) {
+        throw new ErrorResponse(
+            "Event does not exist",
+            ErrorCodes.BAD_REQUESET,
+        );
+    }
+    const invitedUsers = eventRecord.invitedUsers;
+    console.log(userId);
+    console.log(invitedUsers);
+    for (let i = 0; i < invitedUsers.length; i++) {
+        const invitedUser = invitedUsers[i];
+        if (invitedUser.user.equals(userId)) {
+            invitedUser.status = status;
+            await eventRecord.save();
+            return invitedUser;
+        }
+    }
+    throw new ErrorResponse(
+        "You are not invited to this event",
+        ErrorCodes.BAD_REQUEST,
+    );
+};
 async function generateEventCode() {
     const code = Utils.generateRandomCode(6);
     const eventRecord = await Event.findOne({ code });
@@ -88,4 +114,5 @@ module.exports = {
     updateEvent,
     deleteEvent,
     getAllEvents,
+    updateInviteStatus,
 }
