@@ -6,7 +6,6 @@ const ErrorCodes = require("../utils/status-codes");
 const { generateEventCode, compareEventTime } = require("../utils/helper");
 
 const createEvent = async (data) => {
-
     compareEventTime(data.startTime, data.endTime);
     const eventCode = await generateEventCode();
     data.code = eventCode;
@@ -15,8 +14,21 @@ const createEvent = async (data) => {
 
 };
 
-const getEvent = async (eventId) => {
-    const eventRecord = await Event.findById(eventId);
+const getAllEvents = async (filter, userId) => {
+    if (filter.name) {
+        const eventRecords = await Event.find({ name: { $regex: filter.name }, createdBy: userId });
+        return eventRecords;
+    }
+    const eventRecords = await Event.find({ createdBy: userId });
+    return eventRecords;
+}
+
+
+const getEvent = async (eventId, userId) => {
+    const eventRecord = await Event.findOne({
+        id: eventId,
+        createdBy: userId,
+    });
     if (!eventRecord) {
         throw new ErrorResponse(
             "Event does not exist",
@@ -25,7 +37,7 @@ const getEvent = async (eventId) => {
     }
     return eventRecord;
 }
-const updateEvent = async (eventId, userId, data) => {
+const updateEvent = async (eventId, data, userId) => {
     const eventRecord = await Event.findOneAndUpdate({ _id: eventId, userId }, data, { new: true, runValidators: true });
     if (!eventRecord) {
         throw new ErrorResponse(
@@ -53,4 +65,5 @@ module.exports = {
     createEvent,
     updateEvent,
     deleteEvent,
+    getAllEvents,
 }

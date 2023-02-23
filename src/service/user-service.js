@@ -17,6 +17,13 @@ const signIn = async (data) => {
     //Check whether user exist for given email id or not.
     const userRecord = await getUserByEmail(email);
 
+    if (!userRecord) {
+        throw new ErrorResponse(
+            "Email id  is wrong",
+            ErrorCodes.BAD_REQUESET,
+        );
+    }
+
     if (userRecord.password != password) {
         throw new ErrorResponse(
             "Password is wrong",

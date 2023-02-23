@@ -2,42 +2,56 @@ const { EventService } = require("../service/index");
 
 const asyncHandler = require("../utils/asyncHandler");
 
-
 const createEvent = asyncHandler(async (req, res) => {
-    console.log(req.file);
-    console.log("  \n");
-    console.log(req.body);
-    const params = { ...req.body, userId: req.user._id };
+    const params = { ...req.body, createdBy: req.userId };
     const eventRecord = await EventService.createEvent(params);
     return res.CREATED(eventRecord);
 });
 
 const getEvent = asyncHandler(async (req, res) => {
-    const params = { ...req.params };
-    const eventRecord = await EventService.getEvent(params.id);
+    const params = req.params;
+    const userId = req.userId
+    const eventRecord = await EventService.getEvent(params.id, userId);
     return res.CREATED(eventRecord);
 });
 
+const getAllEvents = asyncHandler(async (req, res) => {
+    const params = req.query;
+    const userId = req.userId;
+    const eventRecords = await EventService.getAllEvents(params, userId);
+    return res.OK(eventRecords);
+})
 const uploadImage = asyncHandler(async (req, res) => {
-    const image = req.file;
-    return res.CREATED(image);
+    const images = req.files;
+    const responseArray = [];
+    for (let i = 0; i < images.length; i++) {
+        const data = {
+            name: images[i].originalname,
+            path: images[i].path,
+        };
+        responseArray.push(data);
+    }
+    return res.CREATED(responseArray);
 
 });
 const updateEvent = asyncHandler(async (req, res) => {
-    const params = { body: req.body, userId: req.user._id, eventId: req.params.id };
-    const eventRecord = await EventService.updateEvent(params.eventId, params.userId, params.body);
+    const params = { ...req.body, ...req.params };
+    const userId = { req };
+    const eventRecord = await EventService.updateEvent(params.id, params, userId);
     return res.OK(eventRecord);
 });
 
 const deleteEvent = asyncHandler(async (req, res) => {
-    const params = { ...req.params, userId: req.user._id };
-    const eventRecord = await EventService.deleteEvent(params.id, params.userId);
+    const params = req.params;
+    const userId = { req };
+    const eventRecord = await EventService.deleteEvent(params.id, userId);
     return res.OK(eventRecord);
 });
 
 module.exports = {
     createEvent,
     getEvent,
+    getAllEvents,
     updateEvent,
     deleteEvent,
     uploadImage,

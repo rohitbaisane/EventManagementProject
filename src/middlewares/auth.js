@@ -24,6 +24,7 @@ const isValidUser = asyncHandler(async (req, res, next) => {
         );
     }
     req.user = userRecord;
+    req.userId = userRecord._id;
     next();
 });
 

@@ -15,10 +15,17 @@ const eventSchema = new mongoose.Schema({
         maxlength: 6,
     },
     invitedUsers: [{
-        type: mongoose.Types.ObjectId,
-        ref: "User",
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: "User",
+        },
+        status: {
+            type: String,
+            enum: ['Pending', 'Accepted', 'Rejected'],
+            default: 'Pending',
+        }
     }],
-    userId: {
+    createdBy: {
         type: mongoose.Types.ObjectId,
         required: true,
         ref: "User",
