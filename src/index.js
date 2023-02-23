@@ -3,7 +3,7 @@ const app = express();
 
 require("./db");
 
-const errorHandler = require("./middlewares/error-handler");
+const errorHandler = require("./middlewares/errorHandler");
 const responses = require("./middlewares/response");
 const apiRoutes = require("./routes/index");
 const PORT = 5000;

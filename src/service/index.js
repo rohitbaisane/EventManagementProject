@@ -1,4 +1,4 @@
 module.exports = {
-    UserService: require("./user-service"),
-    EventService: require("./event-service"),
+    UserService: require("./userService"),
+    EventService: require("./eventService"),
 }

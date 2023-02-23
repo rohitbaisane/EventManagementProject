@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { UserService } = require("../service/index");
 
-const ErrorCodes = require("../utils/status-codes");
+const ErrorCodes = require("../utils/statusCodes");
 const ErrorResponse = require("../utils/error");
 
 const asyncHandler = require("../utils/asyncHandler");

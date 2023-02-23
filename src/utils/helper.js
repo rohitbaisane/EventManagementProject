@@ -1,26 +1,23 @@
 const ErrorResponse = require("./error");
-const ErrorCodes = require("./status-codes");
+const ErrorCodes = require("./statusCodes");
 
 const Event = require("../models/event");
-async function generateEventCode() {
 
-    const eventCode = Math.floor(Math.random() * 1000000);
-    if (eventCode < 100000) {
-        console.log(eventCode);
-        return generateEventCode();
+function generateRandomCode(length) {
+    const randomString = "abcdefghijklmnopqrstuvwxyz";
+    const generatedString = [];
+    for (let i = 0; i < length; i++) {
+        const indice = Math.floor(Math.random() * (25 - 0 + 1) + 0);
+        const randomCharacter = randomString[indice];
+        generatedString.push(randomCharacter);
     }
-    const event = await Event.findOne({ code: eventCode });
-    if (event) {
-        return generateEventCode();
-    }
-    return eventCode;
-
+    const myString = generatedString.join("");
+    return myString;
 };
 
-function compareEventTime(startTime, endTime) {
+function compareStartAndEndTime(startTime, endTime) {
     const t1 = new Date(startTime).getTime();
     const t2 = new Date(endTime).getTime();
-
 
     const currTime = new Date().getTime();
 
@@ -41,6 +38,6 @@ function compareEventTime(startTime, endTime) {
 
 }
 module.exports = {
-    generateEventCode,
-    compareEventTime
+    generateRandomCode,
+    compareStartAndEndTime,
 };

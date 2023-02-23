@@ -1,6 +1,6 @@
 const { UserService } = require("../service/index");
 
-const checkMandatoryFields = require("./common");
+const { checkMandatoryFields } = require("./common");
 
 const asyncHandler = require("../utils/asyncHandler");
 

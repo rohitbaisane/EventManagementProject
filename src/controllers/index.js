@@ -1,4 +1,5 @@
 module.exports = {
-    UserController: require("./user-controller"),
-    EventController: require("./event-controller"),
+    UserController: require("./userController"),
+    EventController: require("./eventController"),
+    CommonController: require("./common"),
 }

@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const ErrorResponse = require("../utils/error");
 
 const jwt = require("jsonwebtoken");
-const ErrorCodes = require("../utils/status-codes");
+const ErrorCodes = require("../utils/statusCodes");
 
 const createUser = async (data) => {
     const userRecord = await User.create(data);

@@ -10,7 +10,7 @@ const eventSchema = new mongoose.Schema({
         required: true,
     },
     code: {
-        type: Number,
+        type: String,
         required: true,
         maxlength: 6,
     },
@@ -21,8 +21,8 @@ const eventSchema = new mongoose.Schema({
         },
         status: {
             type: String,
-            enum: ['Pending', 'Accepted', 'Rejected'],
-            default: 'Pending',
+            enum: ['PENDING', 'ACCEPTED', 'REJECTED'],
+            default: 'PENDING',
         }
     }],
     createdBy: {

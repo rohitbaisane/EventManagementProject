@@ -21,19 +21,7 @@ const getAllEvents = asyncHandler(async (req, res) => {
     const eventRecords = await EventService.getAllEvents(params, userId);
     return res.OK(eventRecords);
 })
-const uploadImage = asyncHandler(async (req, res) => {
-    const images = req.files;
-    const responseArray = [];
-    for (let i = 0; i < images.length; i++) {
-        const data = {
-            name: images[i].originalname,
-            path: images[i].path,
-        };
-        responseArray.push(data);
-    }
-    return res.CREATED(responseArray);
 
-});
 const updateEvent = asyncHandler(async (req, res) => {
     const params = { ...req.body, ...req.params };
     const userId = { req };
@@ -54,5 +42,4 @@ module.exports = {
     getAllEvents,
     updateEvent,
     deleteEvent,
-    uploadImage,
 }
