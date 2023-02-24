@@ -87,8 +87,7 @@ const updateInviteStatus = async (data, userId) => {
         );
     }
     const invitedUsers = eventRecord.invitedUsers;
-    console.log(userId);
-    console.log(invitedUsers);
+
     for (let i = 0; i < invitedUsers.length; i++) {
         const invitedUser = invitedUsers[i];
         if (invitedUser.user.equals(userId)) {
@@ -102,6 +101,8 @@ const updateInviteStatus = async (data, userId) => {
         ErrorCodes.BAD_REQUEST,
     );
 };
+
+
 async function generateEventCode() {
     const code = Utils.generateRandomCode(6);
     const eventRecord = await Event.findOne({ code });
