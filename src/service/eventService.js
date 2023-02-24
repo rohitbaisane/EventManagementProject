@@ -76,6 +76,10 @@ const deleteEvent = async (eventId, userId) => {
 
 };
 
+const getInvitationsList = async (userId) => {
+    const eventRecords = await Event.find({ invitedUsers: { $elemMatch: { user: userId } } });
+    return eventRecords;
+}
 const updateInviteStatus = async (data, userId) => {
 
     const { code, status } = data;
@@ -117,5 +121,6 @@ module.exports = {
     updateEvent,
     deleteEvent,
     getAllEvents,
+    getInvitationsList,
     updateInviteStatus,
 }

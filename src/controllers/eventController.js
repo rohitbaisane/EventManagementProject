@@ -36,6 +36,11 @@ const deleteEvent = asyncHandler(async (req, res) => {
     return res.OK(eventRecord);
 });
 
+const getInvitationsList = asyncHandler(async (req, res) => {
+    const userId = req.userId;
+    const eventRecords = await EventService.getInvitationsList(userId);
+    return res.OK(eventRecords);
+});
 const updateInviteStatus = asyncHandler(async (req, res) => {
     const params = req.body;
     const userId = req.userId;
@@ -49,4 +54,5 @@ module.exports = {
     updateEvent,
     deleteEvent,
     updateInviteStatus,
+    getInvitationsList,
 }
