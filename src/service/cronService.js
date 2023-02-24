@@ -6,12 +6,20 @@ cron.schedule('* * * * *', async () => {
     console.log("Cron is running correctly");
     const eventRecords = await Event.find();
     for (let i = 0; i < eventRecords.length; i++) {
+
         const eventRecord = eventRecords[i];
-        const startTime = eventRecord.startTime.getTime();
-        const currTime = new Date().getTime();
-        console.log((currTime - startTime) / (60 * 1000));
-        if (startTime - currTime == 15 * 60 * 1000) {
-            console.log("Sending email to all users of event");
+
+        const dt1 = eventRecord.startTime;
+        const dt2 = new Date();
+
+        const t1 = dt1.getTime();
+        const t2 = dt2.getTime();
+
+        const diffInMinutes = Math.round(((t1 - t2) / 60000));
+        console.log(diffInMinutes);
+
+        if (diffInMinutes == 30) {
+            console.log("Email is sent");
         }
     }
 });
