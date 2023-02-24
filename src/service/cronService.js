@@ -22,4 +22,5 @@ cron.schedule('* * * * *', async () => {
             console.log("Email is sent");
         }
     }
-});
+}
+);

@@ -8,3 +8,5 @@ const isValidUser = require("../middlewares/auth");
 const upload = require("../middlewares/fileUpload");
 
 router.post("/fileupload", isValidUser, upload.array("images", 10), CommonController.uploadImage);
+
+module.exports = router;
