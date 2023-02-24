@@ -1,7 +1,7 @@
 const ErrorResponse = require("../utils/error")
 
 const asyncHandler = require("../utils/asyncHandler");
-const isValidUser = require("../middlewares/auth");
+
 
 const uploadImage = asyncHandler(async (req, res) => {
     const images = req.files;
