@@ -23,6 +23,10 @@ const eventSchema = new mongoose.Schema({
             type: String,
             enum: ['PENDING', 'ACCEPTED', 'REJECTED'],
             default: 'PENDING',
+        },
+        respondedTime: {
+            type: Date,
+            default: null,
         }
     }],
     createdBy: {

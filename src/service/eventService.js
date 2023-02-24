@@ -77,7 +77,7 @@ const deleteEvent = async (eventId, userId) => {
 };
 
 const getInvitationsList = async (userId) => {
-    const eventRecords = await Event.find({ invitedUsers: { $elemMatch: { user: userId } } });
+    const eventRecords = await Event.find({ invitedUsers: { $elemMatch: { user: userId } } }).populate("invitedUsers.user");
     return eventRecords;
 }
 const updateInviteStatus = async (data, userId) => {
@@ -96,6 +96,7 @@ const updateInviteStatus = async (data, userId) => {
         const invitedUser = invitedUsers[i];
         if (invitedUser.user.equals(userId)) {
             invitedUser.status = status;
+            invitedUser.respondedTime = new Date();
             await eventRecord.save();
             return invitedUser;
         }
