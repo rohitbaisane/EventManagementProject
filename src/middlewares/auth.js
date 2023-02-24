@@ -1,8 +1,11 @@
 const jwt = require("jsonwebtoken");
+
 const { UserService } = require("../service/index");
 
 const ErrorCodes = require("../utils/statusCodes");
 const ErrorResponse = require("../utils/error");
+
+const { JWT_SECREATE } = require("../config/serverConfig");
 
 const asyncHandler = require("../utils/asyncHandler");
 
@@ -15,7 +18,7 @@ const isValidUser = asyncHandler(async (req, res, next) => {
             ErrorCodes.BAD_REQUESET
         );
     }
-    const object = jwt.verify(token, "This is my secreate key");
+    const object = jwt.verify(token, JWT_SECREATE);
     const userRecord = await UserService.getUser(object.id);
     if (!userRecord) {
         throw new ErrorResponse(

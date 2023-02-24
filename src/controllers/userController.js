@@ -5,8 +5,8 @@ const { checkMandatoryFields } = require("./common");
 const asyncHandler = require("../utils/asyncHandler");
 
 const getUser = asyncHandler(async (req, res) => {
-    const userId = { req };
-    const userRecord = await UserService.getUser(userId);
+    const id = req.userId;
+    const userRecord = await UserService.getUser(id);
     return res.OK(userRecord);
 });
 
@@ -20,24 +20,20 @@ const signIn = asyncHandler(async (req, res) => {
 const signUp = asyncHandler(async (req, res) => {
     const params = { ...req.body };
     checkMandatoryFields(params, ['name', 'email', 'password']);
-    const userRecord = await UserService.createUser({
-        name: params.name,
-        email: params.email,
-        password: params.password
-    });
+    const userRecord = await UserService.createUser(params);
     return res.OK(userRecord);
 });
 
 const updateUser = asyncHandler(async (req, res) => {
     const params = { ...req.body };
-    const id = req.userId
-    const userRecord = await UserService.updateUser(params.id, params);
+    const id = req.userId;
+    const userRecord = await UserService.updateUser(id, params);
     return res.OK(userRecord);
 });
 
 const deleteUser = asyncHandler(async (req, res) => {
     const id = req.userId;
-    const userRecord = await UserService.deleteUser(params.id);
+    const userRecord = await UserService.deleteUser(id);
     return res.OK(userRecord);
 });
 

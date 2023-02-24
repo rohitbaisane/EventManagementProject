@@ -6,8 +6,9 @@ require("./service/cronService");
 
 const errorHandler = require("./middlewares/errorHandler");
 const responses = require("./middlewares/response");
+
 const apiRoutes = require("./routes/index");
-const PORT = 5000;
+const { PORT } = require("./config/serverConfig");
 
 // prepare and start the starver.
 const prepareAndStartServer = async (req, res) => {
@@ -19,7 +20,7 @@ const prepareAndStartServer = async (req, res) => {
     app.use("/api", responses);
     app.use("/api", apiRoutes);
     app.use("/api", errorHandler);
-    app.listen(PORT, () => {
+    app.listen(5000, () => {
         console.log("Server is listening");
     })
 
