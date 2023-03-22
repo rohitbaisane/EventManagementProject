@@ -1,0 +1,8 @@
+/.env
+AUDITLOG-SERVICE/config/queueconfig.json
+API_GATEWAY/node_modules
+AUDITLOG-SERVICE/node_modules
+BACKEND-SERVICE/node_modules
+/mongodata
+/docker-compose.local.yaml
+/docker-compose.prod.yaml

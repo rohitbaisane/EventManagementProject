@@ -1,0 +1,38 @@
+version: '2.3'
+services:
+  mongo-service:
+    build:
+      context: './MONGODB-SERVICE'
+    image: "rohitbaisane/mongodb-service:${RANDOM_TAG}"   
+
+  backend-service:
+    build:
+      context: './BACKEND-SERVICE'
+    image: rohitbaisane/backend-service:${RANDOM_TAG}
+
+  api-service:
+    build:
+      context: './API_GATEWAY'
+    image: rohitbaisane/api-service:${RANDOM_TAG}
+
+  auditlog-service:
+    build:
+      context: './AUDITLOG-SERVICE'
+    image: rohitbaisane/auditlog-service:${RANDOM_TAG}
+
+  rabbitmq-service:
+    build:
+      context: './RABBITMQ-SERVICE'
+    image: rohitbaisane/rabbitmq-service:${RANDOM_TAG}
+
+  mongointerface-service:
+    build:
+      context: './MONGOINTERFACE-SERVICE'
+    image: rohitbaisane/mongointerface-service:${RANDOM_TAG}
+
+volumes:
+  mongodata:
+
+networks:
+  rohitnetwork:
+    driver: 'bridge'
