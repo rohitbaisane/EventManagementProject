@@ -4,8 +4,13 @@ const config = require("../config/queueConfig.json");
 let broker;
 
 (async function connection() {
-    console.log("new connection created");
-    broker = await Broker.create(config);
+    try {
+        console.log("new connection created");
+        broker = await Broker.create(config);
+    }
+    catch (err) {
+        console.log(err);
+    }
 })();
 
 module.exports = function publish(message) {

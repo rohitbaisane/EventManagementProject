@@ -6,3 +6,5 @@ BACKEND-SERVICE/node_modules
 /mongodata
 /docker-compose.local.yaml
 /docker-compose.prod.yaml
+/BACKEND-SERVICE/LOGS
+BACKEND-SERVICE/src/config/queueConfig.json
